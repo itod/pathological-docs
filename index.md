@@ -1,3 +1,44 @@
+###Terms
+
+**Term:** **boolean**
+
+An object of type boolean can have one of two values, true and false.
+
+**Term:** **number**
+
+A number represents a floating-point number. A number can have any double-precision 64-bit format [IEEE 754](http://www.w3.org/TR/xpath/#IEEE754) value.
+
+The numeric operators convert their operands to numbers as if by calling the `number` function.
+
+**Term:** **string**
+
+Strings consist of a sequence of zero or more [Unicode](http://www.unicode.org/ "Unicode Consortium") characters.
+
+**Term:** **date**
+
+Date objects represent a precise moment in time.
+
+**Term:** **value**
+
+A value is a date, a string, a number or a boolean object. Values are the primitive objects which are *not* nodes (files or folders).
+
+**Term:** **node**
+
+A node is a **file** or **folder** in the OS X Finder.
+
+**Term:** **node-set**
+
+A node-set is a collection of distinct files and/or folders in filesystem order.
+
+**Term:** **Location Path**
+
+A location path is an expression that consists of one or more **steps** separated by `/` or sometimes `//` operators. The expression returns the set of nodes (files or folders) selected by the path.
+
+**Term:** **Step**
+
+A step in a location path consists of three parts: the **axis**, the **node test**, and zero or more **predicates**.
+
+
 ###String Functions
 
 **Function:** *string* **string**(*object?*)
