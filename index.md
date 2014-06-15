@@ -20,7 +20,7 @@ Date objects represent a precise moment in time.
 
 **Term:** **value**
 
-A value is a date, a string, a number or a boolean object. Values are the primitive objects which are *not* nodes (files or folders).
+A value is a *date*, a *string*, a *number* or a *boolean* object. Values are the primitive objects which are *not* nodes (files or folders).
 
 **Term:** **node**
 
@@ -30,14 +30,37 @@ A node is a **file** or **folder** in the OS X Finder.
 
 A node-set is a collection of distinct files and/or folders in filesystem order.
 
+**Term:** **filesystem order**
+
+There is an ordering, filesystem order, defined on all the nodes in the Finder corresponding to the alphabetic ordering of files and folders inside their parent folders. Thus, the root node will be the first node. Folder nodes occur before their children. 
+
 **Term:** **Location Path**
 
 A location path is an expression that consists of one or more **steps** separated by `/` or sometimes `//` operators. The expression returns the set of nodes (files or folders) selected by the path.
 
 **Term:** **Step**
 
-A step in a location path consists of three parts: the **axis**, the **node test**, and zero or more **predicates**.
+A location step has three parts:
 
+* an axis, which specifies the tree relationship between the nodes selected by the location step and the context node,
+* a node test, which specifies the node type and name of the nodes selected by the location step, and
+* zero or more predicates, which use arbitrary expressions to further refine the set of nodes selected by the location step.
+
+**Term:** **Axis**
+
+The following axes are available:
+
+* the `child` axis contains the children of the context node
+* the `descendant` axis contains the descendants of the context node; a descendant is a child or a child of a child and so on
+* the `parent` axis contains the parent of the context node, if there is one
+* the `ancestor` axis contains the ancestors of the context node; the ancestors of the context node consist of the parent of context node and the parent's parent and so on; thus, the ancestor axis will always include the root node, unless the context node is the root node
+* the `following-sibling` axis contains all the following siblings of the context node
+* the `preceding-sibling` axis contains all the preceding siblings of the context node
+* the `following` axis contains all nodes in the same volume as the context node that are after the context node in filesystem order, excluding any descendants
+* the `preceding` axis contains all nodes in the same volume as the context node that are before the context node in filesystem order, excluding any ancestors
+* the `self` axis contains just the context node itself
+* the `descendant-or-self` axis contains the context node and the descendants of the context node
+* the `ancestor-or-self` axis contains the context node and the ancestors of the context node; thus, the ancestor axis will always include the root node
 
 ###String Functions
 
@@ -191,8 +214,6 @@ The `number` function converts its argument to a number as follows:
 * an object of a type other than the four basic types is converted to a number in a way that is dependent on that type
 
 If the argument is omitted, it defaults to a node-set with the context node as its only member.
-
-**NOTE:** The `number` function should not be used for conversion of numeric data occurring in an element in an XML document unless the element is of a type that represents numeric data in a language-neutral format (which would typically be transformed into a language-specific format for presentation to a user). In addition, the number function cannot be used unless the language-neutral format used by the element is consistent with the XPath syntax for a Number.
 
 **Function:** *number* **sum**(*node-set*)
 
