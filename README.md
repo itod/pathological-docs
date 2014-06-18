@@ -81,7 +81,7 @@ A node test can be one of two types:
     * `*` *(: matches any name. i.e. any file or folder :)*
     * `*.jpg` *(: matches any file with the `jpg` extension :)*
     * `report.*` *(: matches any file with the `report` base name :)*
-    * `Application%20Support` *(: See [note about whitespace](#note-whitespace) :)*
+    * `Application%20Support` *(: see [note about whitespace](#note-whitespace) :)*
 
 <a name="axis"></a>**Term:** **axis**
 
