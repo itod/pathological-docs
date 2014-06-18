@@ -32,7 +32,7 @@ An object of type boolean can have one of two values, true and false.
 
 A number represents a floating-point number. A number can have any double-precision 64-bit format [IEEE 754](http://www.w3.org/TR/xpath/#IEEE754) value.
 
-The numeric operators convert their operands to numbers as if by calling the [`number`](#fn-number) function.
+The numeric operators convert their operands to numbers as if by calling the `[number](#fn-number)` function.
 
 <a name="string"></a>**Term:** **string**
 
@@ -104,7 +104,7 @@ The following axes are available:
 OS X allows file and folder names to contain whitespace. For example, a commonly used folder with a name containing whitespace is `Application Support` (located at `~/Library/Application Support`). However, a [name test](#node-test) in a [location path](#location-path) cannot cannot contain whitespace. There are currently two simple solutions to allow a location path to contain name tests with whitespace:
 
 1. Percent-encode the whitespace using `%20` to represent each space character. So `Application Support` becomes: `Application%20Support`. For example: `~/Library/Application%20Support`
-2. Use a wildcard name test (`*`) plus a [predicate]() which tests the node's name using the [`name`](#fn-name) function. For example: `~/Library/*[name() = 'Application Support']`
+2. Use a wildcard name test (`*`) plus a [predicate]() which tests the node's name using the `[name](#fn-name)` function. For example: `~/Library/*[name() = 'Application Support']`
 
 ###<a name="string-functions"></a>String Functions
 
@@ -126,7 +126,7 @@ The `string` function converts an object to a string as follows:
 * An object of a type other than the four basic types is converted to a string in a way that is dependent on that type.
 * If the argument is omitted, it defaults to a node-set with the context node as its only member.
 
-**NOTE:** The [`string`](#fn-string) function is not intended for converting numbers into strings for presentation to users. The [`format-number`](#fn-format-number) function provides this functionality.
+**NOTE:** The `[string](#fn-string)` function is not intended for converting numbers into strings for presentation to users. The `[format-number](#fn-format-number)` function provides this functionality.
 
 <a name="fn-matches"></a>**Function:** *string* **matches**(*string input*, *string pattern*, *string? flags*)
 
@@ -142,7 +142,7 @@ The available flags are:
 
 The `replace` function returns the string that is obtained by replacing each non-overlapping substring of `input` that matches the given regular expression supplied as `pattern` with an occurrence of the `replacement` string.
 
-The `flags` argument is interpreted in the same manner as for the [`matches`](#fn-matches) function.
+The `flags` argument is interpreted in the same manner as for the `[matches](#fn-matches)` function.
 
 <a name="fn-compare"></a>**Function:** *string* **compare**(*string*, *string*)
 
@@ -179,7 +179,7 @@ The `substring` function returns the substring of the first argument starting at
 More precisely, each character in the string is considered to have a numeric position: the position of the first character is 1, the position of the second character is 2 and so on.
 
 **NOTE:** This differs from Java and ECMAScript, in which the String.substring method treats the position of the first character as 0.
-The returned substring contains those characters for which the position of the character is greater than or equal to the rounded value of the second argument and, if the third argument is specified, less than the sum of the rounded value of the second argument and the rounded value of the third argument; the comparisons and addition used for the above follow the standard IEEE 754 rules; rounding is done as if by a call to the [`round`](#fn-round) function. The following examples illustrate various unusual cases:
+The returned substring contains those characters for which the position of the character is greater than or equal to the rounded value of the second argument and, if the third argument is specified, less than the sum of the rounded value of the second argument and the rounded value of the third argument; the comparisons and addition used for the above follow the standard IEEE 754 rules; rounding is done as if by a call to the `[round](#fn-round)` function. The following examples illustrate various unusual cases:
 
 * `substring("12345", 1.5, 2.6)` returns `"234"`
 * `substring("12345", 0, 3)` returns `"12"`
@@ -216,7 +216,7 @@ The `title-case` function returns the argument string with the first charater co
 
 The `translate` function returns the first argument string with occurrences of characters in the second argument string replaced by the character at the corresponding position in the third argument string. For example, `translate("bar","abc","ABC")` returns the string `BAr`. If there is a character in the second argument string with no character at a corresponding position in the third argument string (because the second argument string is longer than the third argument string), then occurrences of that character in the first argument string are removed. For example, `translate("--aaa--","abc-","ABC")` returns `"AAA"`. If a character occurs more than once in the second argument string, then the first occurrence determines the replacement character. If the third argument string is longer than the second argument string, then excess characters are ignored.
 
-**NOTE:** The [`translate`](#fn-translate) function is not a sufficient solution for case conversion in all languages. A future version of XPath may provide additional functions for case conversion.
+**NOTE:** The `[translate](#fn-translate)` function is not a sufficient solution for case conversion in all languages. A future version of XPath may provide additional functions for case conversion.
 
 ###<a name="date-functions"></a>Date Functions
 
@@ -254,7 +254,7 @@ The `number` function converts its argument to a number as follows:
 
 * a string that consists of optional whitespace followed by an optional minus sign followed by a Number followed by whitespace is converted to the IEEE 754 number that is nearest (according to the IEEE 754 round-to-nearest rule) to the mathematical value represented by the string; any other string is converted to NaN
 * boolean true is converted to 1; boolean false is converted to 0
-* a node-set is first converted to a string as if by a call to the [`string`](#fn-string) function and then converted in the same way as a string argument
+* a node-set is first converted to a string as if by a call to the `[string](#fn-string)` function and then converted in the same way as a string argument
 * an object of a type other than the four basic types is converted to a number in a way that is dependent on that type
 
 If the argument is omitted, it defaults to a node-set with the context node as its only member.
@@ -279,7 +279,7 @@ The `ceiling` function returns the smallest (closest to negative infinity) numbe
 
 The `round` function returns the number that is closest to the argument and that is an integer. If there are two such numbers, then the one that is closest to positive infinity is returned. If the argument is NaN, then NaN is returned. If the argument is positive infinity, then positive infinity is returned. If the argument is negative infinity, then negative infinity is returned. If the argument is positive zero, then positive zero is returned. If the argument is negative zero, then negative zero is returned. If the argument is less than zero, but greater than or equal to -0.5, then negative zero is returned.
 
-**NOTE:** For these last two cases, the result of calling the [`round`](#fn-round) function is not the same as the result of adding 0.5 and then calling the [`floor`](#fn-floor) function.
+**NOTE:** For these last two cases, the result of calling the `[round](#fn-round)` function is not the same as the result of adding 0.5 and then calling the `[floor](#fn-floor)` function.
 
 
 ###<a name="boolean-functions"></a>Boolean Functions
@@ -333,7 +333,7 @@ The `extension` function returns the extension part of the file name of the node
 
 The `name` function returns a string containing the file name of the node in the argument node-set that is first in filesystem order. This includes both the base and extension parts of the filename. If the argument node-set is empty or the first node has no file name, an empty string is returned. If the argument it omitted, it defaults to a node-set with the context node as its only member.
 
-**NOTE:** The string returned by the [`name`](#fn-name) function will be the same as the string returned by the [`base`](#fn-base) function for folder nodes. For file nodes, they will differ.
+**NOTE:** The string returned by the `[name](#fn-name)` function will be the same as the string returned by the `[base](#fn-base)` function for folder nodes. For file nodes, they will differ.
 
 <a name="fn-bytes"></a>**Function:** *number* **bytes**(*node-set?*)
 
