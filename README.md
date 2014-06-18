@@ -64,7 +64,10 @@ A node test can be one of two types:
 * a **node type** test tests the *type* of node: either **`file()`** or **`folder()`**
 * a **node name** test tests the *name* of node. Some examples:
     * `Desktop`
-    * `*`
+    * `AnnualReport.doc`
+    * `*` (matches any name. i.e. any file or folder)
+    * `*.jpg` (matches any file with the `jpg` extension)
+    * `report.*` (matches any file with the `report` base name)
     * `Application%20Support` (See [note about whitespace](#note-whitespace))
 
 <a name="axis"></a>**Term:** **axis**
