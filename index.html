@@ -34,6 +34,7 @@
 <ul>
 <li><a href="#terms">Terms</a></li>
 <li><a href="#note-whitespace">A note about whitespace</a></li>
+<li><a href="#comments">Comments</a></li>
 <li><a href="#string-functions">String functions</a></li>
 <li><a href="#date-functions">Date functions</a></li>
 <li><a href="#number-functions">Number functions</a></li>
@@ -103,13 +104,17 @@
 <li><code>Desktop</code></li>
 <li><code>AnnualReport.doc</code></li>
 <li>
-<code>*</code> (matches any name. i.e. any file or folder)</li>
+<code>*</code> <em>(matches any name. i.e. any file or folder)</em>
+</li>
 <li>
-<code>*.jpg</code> (matches any file with the <code>jpg</code> extension)</li>
+<code>*.jpg</code> <em>(matches any file with the <code>jpg</code> extension)</em>
+</li>
 <li>
-<code>report.*</code> (matches any file with the <code>report</code> base name)</li>
+<code>report.*</code> <em>(matches any file with the <code>report</code> base name)</em>
+</li>
 <li>
-<code>Application%20Support</code> (See <a href="#note-whitespace">note about whitespace</a>)</li>
+<code>Application%20Support</code> <em>(See <a href="#note-whitespace">note about whitespace</a>)</em>
+</li>
 </ul>
 </li>
 </ul><p><a name="axis"></a><strong>Term:</strong> <strong>axis</strong></p>
@@ -140,6 +145,21 @@
 <li>Use a wildcard name test (<code>*</code>) plus a <a href="">predicate</a> which tests the node's name using the <a href="#fn-name"><code>name</code></a> function. For example: <code>~/Library/*[name() = 'Application Support']</code>
 </li>
 </ol><h3>
+<a name="comments" class="anchor" href="#comments"><span class="octicon octicon-link"></span></a>
+<a name="comments"></a>Comments</h3>
+
+<p>Comments may be used to provide informative annotation for an expression. Comments are lexical constructs only, and do not affect expression processing.</p>
+
+<p>Comments are strings, delimited by the symbols <code>(:</code> and <code>:)</code>. Comments may be nested.</p>
+
+<p>A comment may be used anywhere ignorable whitespace is allowed.</p>
+
+<p>The following is an example of a comment:</p>
+
+<pre><code>(: Houston, we have a problem :)
+</code></pre>
+
+<h3>
 <a name="string-functions" class="anchor" href="#string-functions"><span class="octicon octicon-link"></span></a>
 <a name="string-functions"></a>String Functions</h3>
 
