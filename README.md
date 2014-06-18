@@ -62,7 +62,7 @@ A location step has three parts:
 
 A node test can be one of two types:
 
-* a **node type** test tests the *type* of node: either **`file()`** or **`folder()`**
+* a **node type** test tests the *type* of node: **`file()`** for files,  **`folder()`** for folders, or **`node()`** for either.
 * a **node name** test tests the *name* of node. Some examples:
     * `Desktop`
     * `AnnualReport.doc`
