@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Pathological-docs by itod</title>
+    <title>Pathological Documentation by itod</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -15,7 +15,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Pathological-docs</h1>
+        <h1>Pathological Documentation</h1>
         <p>Pathological Documentation</p>
 
         <p class="view"><a href="https://github.com/itod/pathological-docs">View the Project on GitHub <small>itod/pathological-docs</small></a></p>
@@ -28,48 +28,60 @@
         </ul>
       </header>
       <section>
-        <h3>
+        <h2>
+<a name="pathological-documentation" class="anchor" href="#pathological-documentation"><span class="octicon octicon-link"></span></a>Pathological Documentation</h2>
+
+<ul>
+<li>Terms</li>
+<li>A note about whitespace</li>
+<li>String functions</li>
+<li>Date functions</li>
+<li>Number functions</li>
+<li>Boolean functions</li>
+<li>Node set functions</li>
+<li>Formatting functions</li>
+</ul><h3>
 <a name="terms" class="anchor" href="#terms"><span class="octicon octicon-link"></span></a>Terms</h3>
 
-<p><strong>Term:</strong> <strong>boolean</strong></p>
+<p><a name="boolean"></a><strong>Term:</strong> <strong>boolean</strong></p>
 
 <p>An object of type boolean can have one of two values, true and false.</p>
 
-<p><strong>Term:</strong> <strong>number</strong></p>
+<p><a name="number"></a><strong>Term:</strong> <strong>number</strong></p>
 
 <p>A number represents a floating-point number. A number can have any double-precision 64-bit format <a href="http://www.w3.org/TR/xpath/#IEEE754">IEEE 754</a> value.</p>
 
-<p>The numeric operators convert their operands to numbers as if by calling the <code>number</code> function.</p>
+<p>The numeric operators convert their operands to numbers as if by calling the <a href="#fn-number"><code>number</code></a> function.</p>
 
-<p><strong>Term:</strong> <strong>string</strong></p>
+<p><a name="string"></a><strong>Term:</strong> <strong>string</strong></p>
 
 <p>Strings consist of a sequence of zero or more <a href="http://www.unicode.org/" title="Unicode Consortium">Unicode</a> characters.</p>
 
-<p><strong>Term:</strong> <strong>date</strong></p>
+<p><a name="date"></a><strong>Term:</strong> <strong>date</strong></p>
 
 <p>Date objects represent a precise moment in time.</p>
 
-<p><strong>Term:</strong> <strong>value</strong></p>
+<p><a name="value"></a><strong>Term:</strong> <strong>value</strong></p>
 
 <p>A value is a <em>date</em>, a <em>string</em>, a <em>number</em> or a <em>boolean</em> object. Values are the primitive objects which are <em>not</em> nodes (files or folders).</p>
 
-<p><strong>Term:</strong> <strong>node</strong></p>
+<p><a name="node"></a><strong>Term:</strong> <strong>node</strong></p>
 
 <p>A node is a <strong>file</strong> or <strong>folder</strong> in the OS X Finder.</p>
 
-<p><strong>Term:</strong> <strong>node-set</strong></p>
+<p><a name="node-set"></a><strong>Term:</strong> <strong>node-set</strong></p>
 
 <p>A node-set is a collection of distinct files and/or folders in filesystem order.</p>
 
-<p><strong>Term:</strong> <strong>filesystem order</strong></p>
+<p><a name="filesystem-order"></a><strong>Term:</strong> <strong>filesystem order</strong></p>
 
 <p>There is an ordering, filesystem order, defined on all the nodes in the Finder corresponding to the alphabetic ordering of files and folders inside their parent folders. Thus, the root node will be the first node. Folder nodes occur before their children. </p>
 
-<p><strong>Term:</strong> <strong>Location Path</strong></p>
+<p><a name="location-path"></a><strong>Term:</strong> <strong>location path</strong></p>
 
 <p>A location path is an expression that consists of one or more <strong>steps</strong> separated by <code>/</code> or sometimes <code>//</code> operators. The expression returns the set of nodes (files or folders) selected by the path.</p>
 
-<p><strong>Term:</strong> <strong>Step</strong></p>
+<p><a name="step"></a><strong>Term:</strong> <strong>step</strong></p>
 
 <p>A location step has three parts:</p>
 
@@ -77,7 +89,7 @@
 <li>an axis, which specifies the tree relationship between the nodes selected by the location step and the context node,</li>
 <li>a node test, which specifies the node type and name of the nodes selected by the location step, and</li>
 <li>zero or more predicates, which use arbitrary expressions to further refine the set of nodes selected by the location step.</li>
-</ul><p><strong>Term:</strong> <strong>Axis</strong></p>
+</ul><p><a name="axis"></a><strong>Term:</strong> <strong>axis</strong></p>
 
 <p>The following axes are available:</p>
 
@@ -94,9 +106,19 @@
 <li>the <code>descendant-or-self</code> axis contains the context node and the descendants of the context node</li>
 <li>the <code>ancestor-or-self</code> axis contains the context node and the ancestors of the context node; thus, the ancestor axis will always include the root node</li>
 </ul><h3>
+<a name="a-note-about-whitespace" class="anchor" href="#a-note-about-whitespace"><span class="octicon octicon-link"></span></a>A Note About Whitespace</h3>
+
+<p>OS X allows file and folder names to contain whitespace. For example, a commonly used folder with a name containing whitespace is <code>Application Support</code> (located at <code>~/Library/Application Support</code>). However, a <a href="#name-test">name test</a> in a <a href="#location-path">location path</a> cannot cannot contain whitespace. There are currently two simple solutions to allow a location path to contain name tests with whitespace:</p>
+
+<ol>
+<li>Percent-encode the whitespace using <code>%20</code> to represent each space character. So <code>Application Support</code> becomes: <code>Application%20Support</code>. For example: <code>~/Library/Application%20Support</code>
+</li>
+<li>Use a wildcard name test (<code>*</code>) plus a <a href="">predicate</a> which tests the node's name using the <a href="#fn-name"><code>name</code></a> function. For example: <code>~/Library/*[name() = 'Application Support']</code>
+</li>
+</ol><h3>
 <a name="string-functions" class="anchor" href="#string-functions"><span class="octicon octicon-link"></span></a>String Functions</h3>
 
-<p><strong>Function:</strong> <em>string</em> <strong>string</strong>(<em>object?</em>)</p>
+<p><a name="fn-string"></a><strong>Function:</strong> <em>string</em> <strong>string</strong>(<em>object?</em>)</p>
 
 <p>The <code>string</code> function converts an object to a string as follows:</p>
 
@@ -123,9 +145,9 @@
 <li><p>The boolean false value is converted to the string <code>false</code>. The boolean true value is converted to the string <code>true</code>.</p></li>
 <li>An object of a type other than the four basic types is converted to a string in a way that is dependent on that type.</li>
 <li>If the argument is omitted, it defaults to a node-set with the context node as its only member.</li>
-</ul><p><strong>NOTE:</strong> The <code>string</code> function is not intended for converting numbers into strings for presentation to users. The <code>format-number</code> function provides this functionality.</p>
+</ul><p><strong>NOTE:</strong> The <a href="#fn-string"><code>string</code></a> function is not intended for converting numbers into strings for presentation to users. The <a href="#fn-format-number"><code>format-number</code></a> function provides this functionality.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>matches</strong>(<em>string input</em>, <em>string pattern</em>, <em>string? flags</em>)</p>
+<p><a name="fn-matches"></a><strong>Function:</strong> <em>string</em> <strong>matches</strong>(<em>string input</em>, <em>string pattern</em>, <em>string? flags</em>)</p>
 
 <p>The <code>matches</code> function returns true if <code>input</code> matches the regular expression supplied as <code>pattern</code> as influenced by the value of <code>flags</code>, if present; otherwise, it returns false.</p>
 
@@ -140,48 +162,48 @@
 <code>i</code>: If present, the match operates in case-insensitive mode.</li>
 <li>
 <code>x</code>: If present, whitespace characters (<code>#x9</code>, <code>#xA</code>, <code>#xD</code> and <code>#x20</code>) in the regular expression are removed prior to matching with one exception: whitespace characters within character class expressions are not removed. This flag can be used, for example, to break up long regular expressions into readable lines.</li>
-</ul><p><strong>Function:</strong> <em>string</em> <strong>replace</strong>(<em>string input</em>, <em>string pattern</em>, <em>string replacement</em>, <em>string? flags</em>)</p>
+</ul><p><a name="fn-replace"></a><strong>Function:</strong> <em>string</em> <strong>replace</strong>(<em>string input</em>, <em>string pattern</em>, <em>string replacement</em>, <em>string? flags</em>)</p>
 
 <p>The <code>replace</code> function returns the string that is obtained by replacing each non-overlapping substring of <code>input</code> that matches the given regular expression supplied as <code>pattern</code> with an occurrence of the <code>replacement</code> string.</p>
 
-<p>The <code>flags</code> argument is interpreted in the same manner as for the <code>matches</code> function.</p>
+<p>The <code>flags</code> argument is interpreted in the same manner as for the <a href="#fn-matches"><code>matches</code></a> function.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>compare</strong>(<em>string</em>, <em>string</em>)</p>
+<p><a name="fn-compare"></a><strong>Function:</strong> <em>string</em> <strong>compare</strong>(<em>string</em>, <em>string</em>)</p>
 
 <p>The <code>compare</code> function returns -1, 0, or 1, depending on whether the value of the first argument is respectively less than, equal to, or greater than the value of the second argument, according to the rules of lexical string comparison.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>concat</strong>(<em>string</em>, <em>string</em>, <em>string</em>)</p>
+<p><a name="fn-concat"></a><strong>Function:</strong> <em>string</em> <strong>concat</strong>(<em>string</em>, <em>string</em>, <em>string</em>)</p>
 
 <p>The <code>concat</code> function returns the concatenation of its arguments.</p>
 
-<p><strong>Function:</strong> <em>boolean</em> <strong>starts-with</strong>(<em>string</em>, <em>string</em>)</p>
+<p><a name="fn-starts-with"></a><strong>Function:</strong> <em>boolean</em> <strong>starts-with</strong>(<em>string</em>, <em>string</em>)</p>
 
 <p>The <code>starts-with</code> function returns true if the first argument string starts with the second argument string, and otherwise returns false.</p>
 
-<p><strong>Function:</strong> <em>boolean</em> <strong>ends-with</strong>(<em>string</em>, <em>string</em>)</p>
+<p><a name="fn-ends-with"></a><strong>Function:</strong> <em>boolean</em> <strong>ends-with</strong>(<em>string</em>, <em>string</em>)</p>
 
-<p>The <code>starts-with</code> function returns true if the first argument string ends with the second argument string, and otherwise returns false.</p>
+<p>The <code>ends-with</code> function returns true if the first argument string ends with the second argument string, and otherwise returns false.</p>
 
-<p><strong>Function:</strong> <em>boolean</em> <strong>contains</strong>(<em>string</em>, <em>string</em>)</p>
+<p><a name="fn-contains"></a><strong>Function:</strong> <em>boolean</em> <strong>contains</strong>(<em>string</em>, <em>string</em>)</p>
 
 <p>The <code>contains</code> function returns true if the first argument string contains the second argument string, and otherwise returns false.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>substring-before</strong>(<em>string</em>, <em>string</em>)</p>
+<p><a name="fn-substring-before"></a><strong>Function:</strong> <em>string</em> <strong>substring-before</strong>(<em>string</em>, <em>string</em>)</p>
 
 <p>The <code>substring-before</code> function returns the substring of the first argument string that precedes the first occurrence of the second argument string in the first argument string, or the empty string if the first argument string does not contain the second argument string. For example, <code>substring-before("1999/04/01","/")</code> returns <code>1999</code>.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>substring-after</strong>(<em>string</em>, <em>string</em>)</p>
+<p><a name="fn-substring-after"></a><strong>Function:</strong> <em>string</em> <strong>substring-after</strong>(<em>string</em>, <em>string</em>)</p>
 
 <p>The <code>substring-after</code> function returns the substring of the first argument string that follows the first occurrence of the second argument string in the first argument string, or the empty string if the first argument string does not contain the second argument string. For example, <code>substring-after("1999/04/01","/")</code> returns <code>04/01</code>, and <code>substring-after("1999/04/01","19")</code> returns <code>99/04/01</code>.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>substring</strong>(<em>string</em>, <em>number</em>, <em>number?</em>)</p>
+<p><a name="fn-substring"></a><strong>Function:</strong> <em>string</em> <strong>substring</strong>(<em>string</em>, <em>number</em>, <em>number?</em>)</p>
 
 <p>The <code>substring</code> function returns the substring of the first argument starting at the position specified in the second argument with length specified in the third argument. For example, <code>substring("12345",2,3)</code> returns <code>"234"</code>. If the third argument is not specified, it returns the substring starting at the position specified in the second argument and continuing to the end of the string. For example, <code>substring("12345",2)</code> returns <code>"2345"</code>.</p>
 
 <p>More precisely, each character in the string is considered to have a numeric position: the position of the first character is 1, the position of the second character is 2 and so on.</p>
 
 <p><strong>NOTE:</strong> This differs from Java and ECMAScript, in which the String.substring method treats the position of the first character as 0.
-The returned substring contains those characters for which the position of the character is greater than or equal to the rounded value of the second argument and, if the third argument is specified, less than the sum of the rounded value of the second argument and the rounded value of the third argument; the comparisons and addition used for the above follow the standard IEEE 754 rules; rounding is done as if by a call to the round function. The following examples illustrate various unusual cases:</p>
+The returned substring contains those characters for which the position of the character is greater than or equal to the rounded value of the second argument and, if the third argument is specified, less than the sum of the rounded value of the second argument and the rounded value of the third argument; the comparisons and addition used for the above follow the standard IEEE 754 rules; rounding is done as if by a call to the <a href="#fn-round"><code>round</code></a> function. The following examples illustrate various unusual cases:</p>
 
 <ul>
 <li>
@@ -202,40 +224,40 @@ The returned substring contains those characters for which the position of the c
 <li>
 <code>substring("12345", -1 div 0, 1 div 0)</code> returns <code>""</code>
 </li>
-</ul><p><strong>Function:</strong> <em>number</em> <strong>string-length</strong>(<em>string?</em>)</p>
+</ul><p><a name="fn-string-length"></a><strong>Function:</strong> <em>number</em> <strong>string-length</strong>(<em>string?</em>)</p>
 
 <p>The <code>string-length</code> returns the number of characters in the string. If the argument is omitted, it defaults to the context node converted to a string, in other words the string-value of the context node.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>normalize-space</strong>(<em>string?</em>)</p>
+<p><a name="fn-normalize-space"></a><strong>Function:</strong> <em>string</em> <strong>normalize-space</strong>(<em>string?</em>)</p>
 
 <p>The <code>normalize-space</code> function returns the argument string with whitespace normalized by stripping leading and trailing whitespace and replacing sequences of whitespace characters by a single space. Whitespace characters are the same as those allowed by the S production in XML (newline <code>#xA</code>, carriage return <code>#xD</code>, space <code>#x20</code>, and tab <code>#x9</code>). If the argument is omitted, it defaults to the context node converted to a string, in other words the string-value of the context node.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>trim-space</strong>(<em>string?</em>)</p>
+<p><a name="fn-trim-space"></a><strong>Function:</strong> <em>string</em> <strong>trim-space</strong>(<em>string?</em>)</p>
 
 <p>The <code>trim-space</code> function returns the argument string with leading and trailing whitespace removed. Whitespace characters are the same as those allowed by the S production in XML (newline <code>#xA</code>, carriage return <code>#xD</code>, space <code>#x20</code>, and tab <code>#x9</code>). If the argument is omitted, it defaults to the context node converted to a string, in other words the string-value of the context node.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>lower-case</strong>(<em>string</em>)</p>
+<p><a name="fn-lower-case"></a><strong>Function:</strong> <em>string</em> <strong>lower-case</strong>(<em>string</em>)</p>
 
 <p>The <code>lower-case</code> function returns the argument string as a lowercase string.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>upper-case</strong>(<em>string</em>)</p>
+<p><a name="fn-upper-case"></a><strong>Function:</strong> <em>string</em> <strong>upper-case</strong>(<em>string</em>)</p>
 
 <p>The <code>upper-case</code> function returns the argument string as a uppercase string.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>title-case</strong>(<em>string</em>)</p>
+<p><a name="fn-title-case"></a><strong>Function:</strong> <em>string</em> <strong>title-case</strong>(<em>string</em>)</p>
 
 <p>The <code>title-case</code> function returns the argument string with the first charater converted to a uppercase character.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>translate</strong>(<em>string</em>, <em>string</em>, <em>string</em>)</p>
+<p><a name="fn-translate"></a><strong>Function:</strong> <em>string</em> <strong>translate</strong>(<em>string</em>, <em>string</em>, <em>string</em>)</p>
 
 <p>The <code>translate</code> function returns the first argument string with occurrences of characters in the second argument string replaced by the character at the corresponding position in the third argument string. For example, <code>translate("bar","abc","ABC")</code> returns the string <code>BAr</code>. If there is a character in the second argument string with no character at a corresponding position in the third argument string (because the second argument string is longer than the third argument string), then occurrences of that character in the first argument string are removed. For example, <code>translate("--aaa--","abc-","ABC")</code> returns <code>"AAA"</code>. If a character occurs more than once in the second argument string, then the first occurrence determines the replacement character. If the third argument string is longer than the second argument string, then excess characters are ignored.</p>
 
-<p><strong>NOTE:</strong> The translate function is not a sufficient solution for case conversion in all languages. A future version of XPath may provide additional functions for case conversion.</p>
+<p><strong>NOTE:</strong> The <a href="#fn-translate"><code>translate</code></a> function is not a sufficient solution for case conversion in all languages. A future version of XPath may provide additional functions for case conversion.</p>
 
 <h3>
 <a name="date-functions" class="anchor" href="#date-functions"><span class="octicon octicon-link"></span></a>Date Functions</h3>
 
-<p><strong>Function:</strong> <em>date</em> <strong>date</strong>(<em>object?</em>)</p>
+<p><a name="fn-date"></a><strong>Function:</strong> <em>date</em> <strong>date</strong>(<em>object?</em>)</p>
 
 <p>The <code>date</code> function converts an object to a date as follows:</p>
 
@@ -257,60 +279,60 @@ The returned substring contains those characters for which the position of the c
 <li>A string is converted to a date using natural language parsing provided by Apple's <code>NSDate</code> class.</li>
 <li>A node-set is converted to a string by returning the creation date of the node in the node-set that is first in filesystem order. If the node-set is empty, an empty string is returned.</li>
 <li>If the argument is omitted, it defaults to a node-set with the context node as its only member.</li>
-</ul><p><strong>Function:</strong> <em>date</em> <strong>now</strong>()</p>
+</ul><p><a name="fn-now"></a><strong>Function:</strong> <em>date</em> <strong>now</strong>()</p>
 
 <p>The <code>now</code> function returns a date representing the current date and time.</p>
 
-<p><strong>Function:</strong> <em>date</em> <strong>created</strong>(<em>node-set?</em>)</p>
+<p><a name="fn-created"></a><strong>Function:</strong> <em>date</em> <strong>created</strong>(<em>node-set?</em>)</p>
 
 <p>The <code>created</code> function returns the creation date of the node in the argument node-set that is first in filesystem order. If the argument node-set is empty or the first node has no expanded-name, an empty string is returned. If the argument is omitted, it defaults to a node-set with the context node as its only member.</p>
 
-<p><strong>Function:</strong> <em>date</em> <strong>modified</strong>(<em>node-set?</em>)</p>
+<p><a name="fn-modified"></a><strong>Function:</strong> <em>date</em> <strong>modified</strong>(<em>node-set?</em>)</p>
 
 <p>The <code>created</code> function returns the modification date of the node in the argument node-set that is first in filesystem order. If the argument node-set is empty or the first node has no expanded-name, an empty string is returned. If the argument is omitted, it defaults to a node-set with the context node as its only member.</p>
 
 <h3>
 <a name="number-functions" class="anchor" href="#number-functions"><span class="octicon octicon-link"></span></a>Number Functions</h3>
 
-<p><strong>Function:</strong> <em>number</em> <strong>number</strong>(<em>object?</em>)</p>
+<p><a name="fn-number"></a><strong>Function:</strong> <em>number</em> <strong>number</strong>(<em>object?</em>)</p>
 
 <p>The <code>number</code> function converts its argument to a number as follows:</p>
 
 <ul>
 <li>a string that consists of optional whitespace followed by an optional minus sign followed by a Number followed by whitespace is converted to the IEEE 754 number that is nearest (according to the IEEE 754 round-to-nearest rule) to the mathematical value represented by the string; any other string is converted to NaN</li>
 <li>boolean true is converted to 1; boolean false is converted to 0</li>
-<li>a node-set is first converted to a string as if by a call to the <code>string</code> function and then converted in the same way as a string argument</li>
+<li>a node-set is first converted to a string as if by a call to the <a href="#fn-string"><code>string</code></a> function and then converted in the same way as a string argument</li>
 <li>an object of a type other than the four basic types is converted to a number in a way that is dependent on that type</li>
 </ul><p>If the argument is omitted, it defaults to a node-set with the context node as its only member.</p>
 
-<p><strong>Function:</strong> <em>number</em> <strong>sum</strong>(<em>node-set</em>)</p>
+<p><a name="fn-sum"></a><strong>Function:</strong> <em>number</em> <strong>sum</strong>(<em>node-set</em>)</p>
 
 <p>The <code>sum</code> function returns the sum, for each node in the argument node-set, of the result of converting the string-values of the node to a number.</p>
 
-<p><strong>Function:</strong> <em>number</em> <strong>abs</strong>(<em>number</em>)</p>
+<p><a name="fn-abs"></a><strong>Function:</strong> <em>number</em> <strong>abs</strong>(<em>number</em>)</p>
 
 <p>The <code>abs</code> function returns the absolute value of the argument.</p>
 
-<p><strong>Function:</strong> <em>number</em> <strong>floor</strong>(<em>number</em>)</p>
+<p><a name="fn-floor"></a><strong>Function:</strong> <em>number</em> <strong>floor</strong>(<em>number</em>)</p>
 
 <p>The <code>floor</code> function returns the largest (closest to positive infinity) number that is not greater than the argument and that is an integer.</p>
 
-<p><strong>Function:</strong> <em>number</em> <strong>ceiling</strong>(<em>number</em>)</p>
+<p><a name="fn-ceiling"></a><strong>Function:</strong> <em>number</em> <strong>ceiling</strong>(<em>number</em>)</p>
 
 <p>The <code>ceiling</code> function returns the smallest (closest to negative infinity) number that is not less than the argument and that is an integer.</p>
 
-<p><strong>Function:</strong> <em>number</em> <strong>round</strong>(<em>number</em>)</p>
+<p><a name="fn-round"></a><strong>Function:</strong> <em>number</em> <strong>round</strong>(<em>number</em>)</p>
 
 <p>The <code>round</code> function returns the number that is closest to the argument and that is an integer. If there are two such numbers, then the one that is closest to positive infinity is returned. If the argument is NaN, then NaN is returned. If the argument is positive infinity, then positive infinity is returned. If the argument is negative infinity, then negative infinity is returned. If the argument is positive zero, then positive zero is returned. If the argument is negative zero, then negative zero is returned. If the argument is less than zero, but greater than or equal to -0.5, then negative zero is returned.</p>
 
-<p><strong>NOTE:</strong> For these last two cases, the result of calling the <code>round</code> function is not the same as the result of adding 0.5 and then calling the <code>floor</code> function.</p>
+<p><strong>NOTE:</strong> For these last two cases, the result of calling the <a href="#fn-round"><code>round</code></a> function is not the same as the result of adding 0.5 and then calling the <a href="#fn-floor"><code>floor</code></a> function.</p>
 
 <h3>
 <a name="boolean-functions" class="anchor" href="#boolean-functions"><span class="octicon octicon-link"></span></a>Boolean Functions</h3>
 
 <p>Boolean Functions</p>
 
-<p><strong>Function:</strong> <em>boolean</em> <strong>boolean</strong>(<em>object</em>)</p>
+<p><a name="fn-boolean"></a><strong>Function:</strong> <em>boolean</em> <strong>boolean</strong>(<em>object</em>)</p>
 
 <p>The <code>boolean</code> function converts its argument to a boolean as follows:</p>
 
@@ -319,85 +341,85 @@ The returned substring contains those characters for which the position of the c
 <li>a <code>node-set</code> is true if and only if it is non-empty</li>
 <li>a <code>string</code> is true if and only if its length is non-zero</li>
 <li>an object of a type other than the four basic types is converted to a boolean in a way that is dependent on that type</li>
-</ul><p><strong>Function:</strong> <em>boolean</em> <strong>not</strong>(<em>boolean</em>)</p>
+</ul><p><a name="fn-not"></a><strong>Function:</strong> <em>boolean</em> <strong>not</strong>(<em>boolean</em>)</p>
 
 <p>The <code>not</code> function returns true if its argument is false, and false otherwise.</p>
 
-<p><strong>Function:</strong> <em>boolean</em> <strong>true</strong>()</p>
+<p><a name="fn-true"></a><strong>Function:</strong> <em>boolean</em> <strong>true</strong>()</p>
 
 <p>The <code>true</code> function returns true.</p>
 
-<p><strong>Function:</strong> <em>boolean</em> <strong>false</strong>()</p>
+<p><a name="fn-false"></a><strong>Function:</strong> <em>boolean</em> <strong>false</strong>()</p>
 
 <p>The <code>false</code> function returns false.</p>
 
 <h3>
 <a name="node-set-functions" class="anchor" href="#node-set-functions"><span class="octicon octicon-link"></span></a>Node Set Functions</h3>
 
-<p><strong>Function:</strong> <em>number</em> <strong>last</strong>()</p>
+<p><a name="fn-last"></a><strong>Function:</strong> <em>number</em> <strong>last</strong>()</p>
 
-<p>The last function returns a number equal to the context size from the expression evaluation context.</p>
+<p>The <code>last</code> function returns a number equal to the context size from the expression evaluation context.</p>
 
-<p><strong>Function:</strong> <em>number</em> <strong>position</strong>()</p>
+<p><a name="fn-position"></a><strong>Function:</strong> <em>number</em> <strong>position</strong>()</p>
 
-<p>The position function returns a number equal to the context position from the expression evaluation context.</p>
+<p>The <code>position</code> function returns a number equal to the context position from the expression evaluation context.</p>
 
-<p><strong>Function:</strong> <em>number</em> <strong>count</strong>(<em>node-set</em>)</p>
+<p><a name="fn-count"></a><strong>Function:</strong> <em>number</em> <strong>count</strong>(<em>node-set</em>)</p>
 
-<p>The count function returns the number of nodes in the argument node-set.</p>
+<p>The <code>count</code> function returns the number of nodes in the argument node-set.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>base</strong>(<em>node-set?</em>)</p>
+<p><a name="fn-base"></a><strong>Function:</strong> <em>string</em> <strong>base</strong>(<em>node-set?</em>)</p>
 
 <p>The <code>base</code> function returns the base part of the file name of the node in the argument node-set that is first in filesystem order. This excludes the file name extension such as <code>.jpg</code>. If the argument node-set is empty or the first node has no expanded-name, an empty string is returned. If the argument is omitted, it defaults to a node-set with the context node as its only member.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>extension</strong>(<em>node-set?</em>)</p>
+<p><a name="fn-extension"></a><strong>Function:</strong> <em>string</em> <strong>extension</strong>(<em>node-set?</em>)</p>
 
 <p>The <code>extension</code> function returns the extension part of the file name of the node in the argument node-set that is first in filesystem order. This excludes any part of the file name up to a <code>.</code>, and includes only the extension itself, such as <code>jpg</code> or <code>txt</code>. If the argument node-set is empty or the first node has no expanded-name, an empty string is returned. If the argument is omitted, it defaults to a node-set with the context node as its only member.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>name</strong>(<em>node-set?</em>)</p>
+<p><a name="fn-name"></a><strong>Function:</strong> <em>string</em> <strong>name</strong>(<em>node-set?</em>)</p>
 
 <p>The <code>name</code> function returns a string containing the file name of the node in the argument node-set that is first in filesystem order. This includes both the base and extension parts of the filename. If the argument node-set is empty or the first node has no file name, an empty string is returned. If the argument it omitted, it defaults to a node-set with the context node as its only member.</p>
 
-<p><strong>NOTE:</strong> The string returned by the <a href="name">name</a> function will be the same as the string returned by the <a href="base">base</a> function for folder nodes. For file nodes, they will differ.</p>
+<p><strong>NOTE:</strong> The string returned by the <a href="#fn-name"><code>name</code></a> function will be the same as the string returned by the <a href="#fn-base"><code>base</code></a> function for folder nodes. For file nodes, they will differ.</p>
 
-<p><strong>Function:</strong> <em>number</em> <strong>bytes</strong>(<em>node-set?</em>)</p>
+<p><a name="fn-bytes"></a><strong>Function:</strong> <em>number</em> <strong>bytes</strong>(<em>node-set?</em>)</p>
 
-<p><strong>Function:</strong> <em>number</em> <strong>kilobytes</strong>(<em>node-set?</em>)</p>
+<p><a name="fn-kilobytes"></a><strong>Function:</strong> <em>number</em> <strong>kilobytes</strong>(<em>node-set?</em>)</p>
 
-<p><strong>Function:</strong> <em>number</em> <strong>megabytes</strong>(<em>node-set?</em>)</p>
+<p><a name="fn-megabytes"></a><strong>Function:</strong> <em>number</em> <strong>megabytes</strong>(<em>node-set?</em>)</p>
 
-<p><strong>Function:</strong> <em>number</em> <strong>gigabytes</strong>(<em>node-set?</em>)</p>
+<p><a name="fn-gigabytes"></a><strong>Function:</strong> <em>number</em> <strong>gigabytes</strong>(<em>node-set?</em>)</p>
 
 <p>The <code>bytes</code> function returns the size in bytes of the node in the argument node-set that is first in filesystem order. If the argument node-set is empty or the first node has no expanded-name, an empty string is returned. If the argument is omitted, it defaults to a node-set with the context node as its only member.</p>
 
-<p><strong>NOTE:</strong> the kilobytes, megabytes and gigabytes functions return decimal (as opposed to binary) values. That is, 1000 bytes are 1 KB. This matches the OS X Finder behavior as of OS X 10.10 Yosemite.</p>
+<p><strong>NOTE:</strong> the <code>kilobytes</code>, <code>megabytes</code> and <code>gigabytes</code> functions return decimal (as opposed to binary) values. That is, 1000 bytes are 1 KB. This matches the OS X Finder behavior as of OS X 10.10 Yosemite.</p>
 
-<p><strong>Function:</strong> <em>number</em> <strong>permissions</strong>(<em>node-set?</em>)</p>
+<p><a name="fn-permissions"></a><strong>Function:</strong> <em>number</em> <strong>permissions</strong>(<em>node-set?</em>)</p>
 
 <p>The <code>permissions</code> function returns the posix permissions of the node in the argument node-set that is first in filesystem order. If the argument node-set is empty or the first node has no expanded-name, an empty string is returned. If the argument is omitted, it defaults to a node-set with the context node as its only member.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>owner</strong>(<em>node-set?</em>)</p>
+<p><a name="fn-owner"></a><strong>Function:</strong> <em>string</em> <strong>owner</strong>(<em>node-set?</em>)</p>
 
 <p>The <code>owner</code> function returns the account name of the user owner of the node in the argument node-set that is first in filesystem order. If the argument node-set is empty or the first node has no expanded-name, an empty string is returned. If the argument is omitted, it defaults to a node-set with the context node as its only member.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>group</strong>(<em>node-set?</em>)</p>
+<p><a name="fn-group"></a><strong>Function:</strong> <em>string</em> <strong>group</strong>(<em>node-set?</em>)</p>
 
 <p>The <code>group</code> function returns the account name of the group owner of the node in the argument node-set that is first in filesystem order. If the argument node-set is empty or the first node has no expanded-name, an empty string is returned. If the argument is omitted, it defaults to a node-set with the context node as its only member.</p>
 
 <h3>
 <a name="formatting-functions" class="anchor" href="#formatting-functions"><span class="octicon octicon-link"></span></a>Formatting Functions</h3>
 
-<p><strong>Function:</strong> <em>string</em> <strong>format-number</strong>(<em>number</em>, <em>string</em>)</p>
+<p><a name="fn-format-number"></a><strong>Function:</strong> <em>string</em> <strong>format-number</strong>(<em>number</em>, <em>string</em>)</p>
 
-<p>The format-number function returns a formatted string representation of the number argument using the string argument as a format template. The template patterns match those <a href="http://www.w3schools.com/xsl/func_formatnumber.asp">defined by XSLT 1.0</a>.</p>
+<p>The <code>format-number</code> function returns a formatted string representation of the number argument using the string argument as a format template. The template patterns match those <a href="http://www.w3schools.com/xsl/func_formatnumber.asp">defined by XSLT 1.0</a>.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>format-date</strong>(<em>date</em>, <em>string</em>)</p>
+<p><a name="fn-format-date"></a><strong>Function:</strong> <em>string</em> <strong>format-date</strong>(<em>date</em>, <em>string</em>)</p>
 
-<p>The format-date function returns a formatted string representation of the date argument using the string argument as a format template. The template patterns are described in the <a href="http://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Format_Patterns">Unicode TR35</a>.</p>
+<p>The <code>format-date</code> function returns a formatted string representation of the date argument using the string argument as a format template. The template patterns are described in the <a href="http://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Format_Patterns">Unicode TR35</a>.</p>
 
-<p><strong>Function:</strong> <em>string</em> <strong>format-bytes</strong>(<em>number</em>)</p>
+<p><a name="fn-format-bytes"></a><strong>Function:</strong> <em>string</em> <strong>format-bytes</strong>(<em>number</em>)</p>
 
-<p>The format-bytes function returns a formatted string representation of the byte count passed as the first number argument.</p>
+<p>The <code>format-bytes</code> function returns a formatted string representation of the byte count passed as the first number argument.</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/itod">itod</a></p>
@@ -405,6 +427,16 @@ The returned substring contains those characters for which the position of the c
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-45320307-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>
