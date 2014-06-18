@@ -1,3 +1,14 @@
+##Pathological Documentation
+
+* Terms
+* A note about whitespace
+* String functions
+* Date functions
+* Number functions
+* Boolean functions
+* Node set functions
+* Formatting functions
+
 ###Terms
 
 **Term:** **boolean**
@@ -34,7 +45,7 @@ A node-set is a collection of distinct files and/or folders in filesystem order.
 
 There is an ordering, filesystem order, defined on all the nodes in the Finder corresponding to the alphabetic ordering of files and folders inside their parent folders. Thus, the root node will be the first node. Folder nodes occur before their children. 
 
-**Term:** **Location Path**
+**Term:** **location path**
 
 A location path is an expression that consists of one or more **steps** separated by `/` or sometimes `//` operators. The expression returns the set of nodes (files or folders) selected by the path.
 
@@ -61,6 +72,13 @@ The following axes are available:
 * the `self` axis contains just the context node itself
 * the `descendant-or-self` axis contains the context node and the descendants of the context node
 * the `ancestor-or-self` axis contains the context node and the ancestors of the context node; thus, the ancestor axis will always include the root node
+
+###A Note About Whitespace
+
+OS X allows file and folder names to contain whitespace. For example, a commonly used folder with a name containing whitespace is `Application Support` (located at `~/Library/Application Support`). However, a [name test]() in a [location path]() cannot cannot contain whitespace. There are currently two simple solutions to allow a location path to contain name tests with whitespace:
+
+1. Percent-encode the whitespace using `%20` to represent each space character. So `Application Support` becomes: `Application%20Support`. For example: `~/Library/Application%20Support`
+2. Use a wildcard name test (`*`) plus a [predicate]() which tests the node's name using the `name` function. For example: `~/Library/*[name() = 'Application Support']`
 
 ###String Functions
 
