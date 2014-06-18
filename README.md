@@ -1,14 +1,26 @@
 ##Pathological Documentation
 
+* [Comments](#comments)
 * [Terms](#terms)
 * [A note about whitespace](#note-whitespace)
-* [Comments](#comments)
 * [String functions](#string-functions)
 * [Date functions](#date-functions)
 * [Number functions](#number-functions)
 * [Boolean functions](#boolean-functions)
 * [Node set functions](#node-set-functions)
 * [Formatting functions](#formatting-functions)
+
+###<a name="comments"></a>Comments
+
+Comments may be used to provide informative annotation for an expression. Comments are lexical constructs only, and do not affect expression processing.
+
+Comments are strings, delimited by the symbols `(:` and `:)`. Comments may be nested.
+
+A comment may be used anywhere ignorable whitespace is allowed.
+
+The following is an example of a comment:
+
+    (: Houston, we have a problem :)
 
 ###<a name="terms"></a>Terms
 
@@ -66,10 +78,10 @@ A node test can be one of two types:
 * a **node name** test tests the *name* of node. Some examples:
     * `Desktop`
     * `AnnualReport.doc`
-    * `*` *(matches any name. i.e. any file or folder)*
-    * `*.jpg` *(matches any file with the `jpg` extension)*
-    * `report.*` *(matches any file with the `report` base name)*
-    * `Application%20Support` *(See [note about whitespace](#note-whitespace))*
+    * `*` *(: matches any name. i.e. any file or folder :)*
+    * `*.jpg` *(: matches any file with the `jpg` extension :)*
+    * `report.*` *(: matches any file with the `report` base name :)*
+    * `Application%20Support` *(: See [note about whitespace](#note-whitespace) :)*
 
 <a name="axis"></a>**Term:** **axis**
 
@@ -93,18 +105,6 @@ OS X allows file and folder names to contain whitespace. For example, a commonly
 
 1. Percent-encode the whitespace using `%20` to represent each space character. So `Application Support` becomes: `Application%20Support`. For example: `~/Library/Application%20Support`
 2. Use a wildcard name test (`*`) plus a [predicate]() which tests the node's name using the [`name`](#fn-name) function. For example: `~/Library/*[name() = 'Application Support']`
-
-###<a name="comments"></a>Comments
-
-Comments may be used to provide informative annotation for an expression. Comments are lexical constructs only, and do not affect expression processing.
-
-Comments are strings, delimited by the symbols `(:` and `:)`. Comments may be nested.
-
-A comment may be used anywhere ignorable whitespace is allowed.
-
-The following is an example of a comment:
-
-    (: Houston, we have a problem :)
 
 ###<a name="string-functions"></a>String Functions
 
