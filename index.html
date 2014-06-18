@@ -32,16 +32,17 @@
 <a name="pathological-documentation" class="anchor" href="#pathological-documentation"><span class="octicon octicon-link"></span></a>Pathological Documentation</h2>
 
 <ul>
-<li>Terms</li>
-<li>A note about whitespace</li>
-<li>String functions</li>
-<li>Date functions</li>
-<li>Number functions</li>
-<li>Boolean functions</li>
-<li>Node set functions</li>
-<li>Formatting functions</li>
+<li><a href="#terms">Terms</a></li>
+<li><a href="#note-whitespace">A note about whitespace</a></li>
+<li><a href="#string-functions">String functions</a></li>
+<li><a href="#date-functions">Date functions</a></li>
+<li><a href="#number-functions">Number functions</a></li>
+<li><a href="#boolean-functions">Boolean functions</a></li>
+<li><a href="#node-set-functions">Node set functions</a></li>
+<li><a href="#formatting-functions">Formatting functions</a></li>
 </ul><h3>
-<a name="terms" class="anchor" href="#terms"><span class="octicon octicon-link"></span></a>Terms</h3>
+<a name="terms" class="anchor" href="#terms"><span class="octicon octicon-link"></span></a>
+<a name="terms"></a>Terms</h3>
 
 <p><a name="boolean"></a><strong>Term:</strong> <strong>boolean</strong></p>
 
@@ -89,6 +90,22 @@
 <li>an axis, which specifies the tree relationship between the nodes selected by the location step and the context node,</li>
 <li>a node test, which specifies the node type and name of the nodes selected by the location step, and</li>
 <li>zero or more predicates, which use arbitrary expressions to further refine the set of nodes selected by the location step.</li>
+</ul><p><a name="node-test"></a><strong>Term:</strong> <strong>node-test</strong></p>
+
+<p>A node test can be one of two types:</p>
+
+<ul>
+<li>a <strong>node type</strong> test tests the <em>type</em> of node: either <strong><code>file()</code></strong> or <strong><code>folder()</code></strong>
+</li>
+<li>a <strong>node name</strong> test tests the <em>name</em> of node. Some examples:
+
+<ul>
+<li><code>Desktop</code></li>
+<li><code>*</code></li>
+<li>
+<code>Application%20Support</code> (See <a href="#note-whitespace">note about whitespace</a>)</li>
+</ul>
+</li>
 </ul><p><a name="axis"></a><strong>Term:</strong> <strong>axis</strong></p>
 
 <p>The following axes are available:</p>
@@ -106,9 +123,10 @@
 <li>the <code>descendant-or-self</code> axis contains the context node and the descendants of the context node</li>
 <li>the <code>ancestor-or-self</code> axis contains the context node and the ancestors of the context node; thus, the ancestor axis will always include the root node</li>
 </ul><h3>
-<a name="a-note-about-whitespace" class="anchor" href="#a-note-about-whitespace"><span class="octicon octicon-link"></span></a>A Note About Whitespace</h3>
+<a name="a-note-about-whitespace" class="anchor" href="#a-note-about-whitespace"><span class="octicon octicon-link"></span></a>
+<a name="note-whitespace"></a>A Note About Whitespace</h3>
 
-<p>OS X allows file and folder names to contain whitespace. For example, a commonly used folder with a name containing whitespace is <code>Application Support</code> (located at <code>~/Library/Application Support</code>). However, a <a href="#name-test">name test</a> in a <a href="#location-path">location path</a> cannot cannot contain whitespace. There are currently two simple solutions to allow a location path to contain name tests with whitespace:</p>
+<p>OS X allows file and folder names to contain whitespace. For example, a commonly used folder with a name containing whitespace is <code>Application Support</code> (located at <code>~/Library/Application Support</code>). However, a <a href="#node-test">name test</a> in a <a href="#location-path">location path</a> cannot cannot contain whitespace. There are currently two simple solutions to allow a location path to contain name tests with whitespace:</p>
 
 <ol>
 <li>Percent-encode the whitespace using <code>%20</code> to represent each space character. So <code>Application Support</code> becomes: <code>Application%20Support</code>. For example: <code>~/Library/Application%20Support</code>
@@ -116,7 +134,8 @@
 <li>Use a wildcard name test (<code>*</code>) plus a <a href="">predicate</a> which tests the node's name using the <a href="#fn-name"><code>name</code></a> function. For example: <code>~/Library/*[name() = 'Application Support']</code>
 </li>
 </ol><h3>
-<a name="string-functions" class="anchor" href="#string-functions"><span class="octicon octicon-link"></span></a>String Functions</h3>
+<a name="string-functions" class="anchor" href="#string-functions"><span class="octicon octicon-link"></span></a>
+<a name="string-functions"></a>String Functions</h3>
 
 <p><a name="fn-string"></a><strong>Function:</strong> <em>string</em> <strong>string</strong>(<em>object?</em>)</p>
 
@@ -255,7 +274,8 @@ The returned substring contains those characters for which the position of the c
 <p><strong>NOTE:</strong> The <a href="#fn-translate"><code>translate</code></a> function is not a sufficient solution for case conversion in all languages. A future version of XPath may provide additional functions for case conversion.</p>
 
 <h3>
-<a name="date-functions" class="anchor" href="#date-functions"><span class="octicon octicon-link"></span></a>Date Functions</h3>
+<a name="date-functions" class="anchor" href="#date-functions"><span class="octicon octicon-link"></span></a>
+<a name="date-functions"></a>Date Functions</h3>
 
 <p><a name="fn-date"></a><strong>Function:</strong> <em>date</em> <strong>date</strong>(<em>object?</em>)</p>
 
@@ -292,7 +312,8 @@ The returned substring contains those characters for which the position of the c
 <p>The <code>created</code> function returns the modification date of the node in the argument node-set that is first in filesystem order. If the argument node-set is empty or the first node has no expanded-name, an empty string is returned. If the argument is omitted, it defaults to a node-set with the context node as its only member.</p>
 
 <h3>
-<a name="number-functions" class="anchor" href="#number-functions"><span class="octicon octicon-link"></span></a>Number Functions</h3>
+<a name="number-functions" class="anchor" href="#number-functions"><span class="octicon octicon-link"></span></a>
+<a name="number-functions"></a>Number Functions</h3>
 
 <p><a name="fn-number"></a><strong>Function:</strong> <em>number</em> <strong>number</strong>(<em>object?</em>)</p>
 
@@ -328,7 +349,8 @@ The returned substring contains those characters for which the position of the c
 <p><strong>NOTE:</strong> For these last two cases, the result of calling the <a href="#fn-round"><code>round</code></a> function is not the same as the result of adding 0.5 and then calling the <a href="#fn-floor"><code>floor</code></a> function.</p>
 
 <h3>
-<a name="boolean-functions" class="anchor" href="#boolean-functions"><span class="octicon octicon-link"></span></a>Boolean Functions</h3>
+<a name="boolean-functions" class="anchor" href="#boolean-functions"><span class="octicon octicon-link"></span></a>
+<a name="boolean-functions"></a>Boolean Functions</h3>
 
 <p>Boolean Functions</p>
 
@@ -354,7 +376,8 @@ The returned substring contains those characters for which the position of the c
 <p>The <code>false</code> function returns false.</p>
 
 <h3>
-<a name="node-set-functions" class="anchor" href="#node-set-functions"><span class="octicon octicon-link"></span></a>Node Set Functions</h3>
+<a name="node-set-functions" class="anchor" href="#node-set-functions"><span class="octicon octicon-link"></span></a>
+<a name="node-set-functions"></a>Node Set Functions</h3>
 
 <p><a name="fn-last"></a><strong>Function:</strong> <em>number</em> <strong>last</strong>()</p>
 
@@ -407,7 +430,8 @@ The returned substring contains those characters for which the position of the c
 <p>The <code>group</code> function returns the account name of the group owner of the node in the argument node-set that is first in filesystem order. If the argument node-set is empty or the first node has no expanded-name, an empty string is returned. If the argument is omitted, it defaults to a node-set with the context node as its only member.</p>
 
 <h3>
-<a name="formatting-functions" class="anchor" href="#formatting-functions"><span class="octicon octicon-link"></span></a>Formatting Functions</h3>
+<a name="formatting-functions" class="anchor" href="#formatting-functions"><span class="octicon octicon-link"></span></a>
+<a name="formatting-functions"></a>Formatting Functions</h3>
 
 <p><a name="fn-format-number"></a><strong>Function:</strong> <em>string</em> <strong>format-number</strong>(<em>number</em>, <em>string</em>)</p>
 
