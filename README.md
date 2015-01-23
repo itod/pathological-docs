@@ -379,7 +379,7 @@ The `format-date` function returns a formatted string representation of the date
 
 The `format-bytes` function returns a formatted string representation of the byte count passed as the first number argument.
 
-The `format-kilobytes`, `format-megabytes`, and `format-gigabytes` expect number arguments which respectively represent kilobytes, megabytes, and gigabytes. All of these functions will return the same formated string for a given number of *bytes*, but each function evaluates the provided number argument as a value given in the magnitude of the function's name.
+The `format-kilobytes`, `format-megabytes`, and `format-gigabytes` functions expect number arguments which respectively represent kilobytes, megabytes, and gigabytes. All of these functions will return the same formated string for a given number of *bytes*, but each function evaluates the provided number argument as a value given in the magnitude of the function's name.
 
 Some example results:
 
