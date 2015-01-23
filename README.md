@@ -384,7 +384,7 @@ The `format-kilobytes`, `format-megabytes`, and `format-gigabytes` expect number
 Some example results:
 
 Input                      | Output
------------------------------------------
+-------------------------- | -------------
 format-bytes(5000)         | '5 KB'
 format-kilobytes(5000)     | '5.0 MB'
 format-megabytes(5000)     | '5.00 GB'
