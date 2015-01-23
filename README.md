@@ -371,5 +371,22 @@ The `format-date` function returns a formatted string representation of the date
 
 <a name="fn-format-bytes"></a>**Function:** *string* **format-bytes**(*number*)
 
+<a name="fn-format-kilobytes"></a>**Function:** *string* **format-kilobytes**(*number*)
+
+<a name="fn-format-megabytes"></a>**Function:** *string* **format-megabytes**(*number*)
+
+<a name="fn-format-gigabytes"></a>**Function:** *string* **format-gigabytes**(*number*)
+
 The `format-bytes` function returns a formatted string representation of the byte count passed as the first number argument.
+
+The `format-kilobytes`, `format-megabytes`, and `format-gigabytes` expect number arguments which respectively represent kilobytes, megabytes, and gigabytes. All of these functions will return the same formated string for a given number of *bytes*, but each function evaluates the provided number argument as the magnitude of its name.
+
+Some example results:
+
+Input                      | Output
+-----------------------------------------
+format-bytes(5000)         | '5 KB'
+format-kilobytes(5000)     | '5.0 MB'
+format-megabytes(5000)     | '5.00 GB'
+format-gigabytes(5000)     | '5.00 TB'
 
