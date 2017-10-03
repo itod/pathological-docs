@@ -1,4 +1,4 @@
-##Pathological Documentation
+## Pathological Documentation
 
 * [Comments](#comments)
 * [Terms](#terms)
@@ -10,7 +10,7 @@
 * [Node set functions](#node-set-functions)
 * [Formatting functions](#formatting-functions)
 
-###<a name="comments"></a>Comments
+### <a name="comments"></a>Comments
 
 Comments may be used to provide informative annotation for an expression. Comments are lexical constructs only, and do not affect expression processing.
 
@@ -22,7 +22,7 @@ The following is an example of a comment:
 
     (: Houston, we have a problem :)
 
-###<a name="terms"></a>Terms
+### <a name="terms"></a>Terms
 
 <a name="boolean"></a>**Term:** **boolean**
 
@@ -99,14 +99,14 @@ The following axes are available:
 * the `descendant-or-self` axis contains the context node and the descendants of the context node
 * the `ancestor-or-self` axis contains the context node and the ancestors of the context node; thus, the ancestor axis will always include the root node
 
-###<a name="note-whitespace"></a>A Note About Whitespace
+### <a name="note-whitespace"></a>A Note About Whitespace
 
 OS X allows file and folder names to contain whitespace. For example, a commonly used folder with a name containing whitespace is `Application Support` (located at `~/Library/Application Support`). However, a [name test](#node-test) in a [location path](#location-path) cannot cannot contain whitespace. There are currently two simple solutions to allow a location path to contain name tests with whitespace:
 
 1. Percent-encode the whitespace using `%20` to represent each space character. So `Application Support` becomes: `Application%20Support`. For example: `~/Library/Application%20Support`
 2. Use a wildcard name test (`*`) plus a [predicate]() which tests the node's name using the [`name`](#fn-name) function. For example: `~/Library/*[name() = 'Application Support']`
 
-###<a name="string-functions"></a>String Functions
+### <a name="string-functions"></a>String Functions
 
 <a name="fn-string"></a>**Function:** *string* **string**(*object?*)
 
@@ -218,7 +218,7 @@ The `translate` function returns the first argument string with occurrences of c
 
 **NOTE:** The [`translate`](#fn-translate) function is not a sufficient solution for case conversion in all languages. A future version of XPath may provide additional functions for case conversion.
 
-###<a name="date-functions"></a>Date Functions
+### <a name="date-functions"></a>Date Functions
 
 <a name="fn-date"></a>**Function:** *date* **date**(*object?*)
 
@@ -246,7 +246,7 @@ The `created` function returns the creation date of the node in the argument nod
 
 The `created` function returns the modification date of the node in the argument node-set that is first in filesystem order. If the argument node-set is empty or the first node has no expanded-name, an empty string is returned. If the argument is omitted, it defaults to a node-set with the context node as its only member.
 
-###<a name="number-functions"></a>Number Functions
+### <a name="number-functions"></a>Number Functions
 
 <a name="fn-number"></a>**Function:** *number* **number**(*object?*)
 
@@ -282,7 +282,7 @@ The `round` function returns the number that is closest to the argument and that
 **NOTE:** For these last two cases, the result of calling the [`round`](#fn-round) function is not the same as the result of adding 0.5 and then calling the [`floor`](#fn-floor) function.
 
 
-###<a name="boolean-functions"></a>Boolean Functions
+### <a name="boolean-functions"></a>Boolean Functions
 
 Boolean Functions
 
@@ -307,7 +307,7 @@ The `true` function returns true.
 
 The `false` function returns false.
 
-###<a name="node-set-functions"></a>Node Set Functions
+### <a name="node-set-functions"></a>Node Set Functions
 
 <a name="fn-last"></a>**Function:** *number* **last**()
 
@@ -359,7 +359,7 @@ The `owner` function returns the account name of the user owner of the node in t
 
 The `group` function returns the account name of the group owner of the node in the argument node-set that is first in filesystem order. If the argument node-set is empty or the first node has no expanded-name, an empty string is returned. If the argument is omitted, it defaults to a node-set with the context node as its only member.
 
-###<a name="formatting-functions"></a>Formatting Functions
+### <a name="formatting-functions"></a>Formatting Functions
 
 <a name="fn-format-number"></a>**Function:** *string* **format-number**(*number*, *string*)
 
