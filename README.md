@@ -26,7 +26,7 @@ The following is an example of a comment:
 
 <a name="boolean"></a>**Term:** **boolean**
 
-An object of type boolean can have one of two values, true and false.
+An object of type [boolean](https://www.scaler.com/topics/boolean-in-javascript/) can have one of two values, true and false.
 
 <a name="number"></a>**Term:** **number**
 
